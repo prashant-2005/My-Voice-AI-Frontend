@@ -41,7 +41,7 @@ const Customize2 = () => {
             const payload = {
                 assistantName
             };
-            const result = await axios.post(`${serverURL}/api/user/update`, payload, {
+            const result = await axios.post(`${serverURL}/api/user`, payload, {
                 withCredentials: true,
                 headers: {
                     "Content-Type": "application/json",
