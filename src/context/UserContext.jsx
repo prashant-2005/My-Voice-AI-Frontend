@@ -6,8 +6,8 @@ export const userDataContext = createContext();
 
 
 const UserContext = ({ children }) => {
-  const serverURL = "http://localhost:8000"
-  const [userData, setUserData] = useState(null);
+  const serverURL = "https://my-voice-ai-backend.onrender.com"
+  const [userData, setUserData] = useState(null);x``
   const [frontendImage, setFrontendImage] = useState(null);
   const [backendImage, setBackendImage] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
