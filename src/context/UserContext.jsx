@@ -6,7 +6,7 @@ export const userDataContext = createContext();
 
 
 const UserContext = ({ children }) => {
-  const serverURL = "https://my-voice-ai-backend.onrender.com"
+  const serverURL = "https://my-voice-ai-frontend.vercel.app/signup"
   const [userData, setUserData] = useState(null);
   const [frontendImage, setFrontendImage] = useState(null);
   const [backendImage, setBackendImage] = useState(null);
