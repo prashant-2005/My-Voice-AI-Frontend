@@ -11,34 +11,58 @@ const Customize2 = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
 
+    // const handleUpdateAssistant = async () => {
+    //     setLoading(true)
+    //     try {
+    //         let formData = new FormData()
+    //         formData.append("assistantName", assistantName)
+    //         if (backendImage) {
+    //             formData.append("assistantImage",backendImage)
+    //         } else {
+    //             formData.append("imageURL", selectedImage)
+    //         }
+    //         const result = await axios.post(`${serverURL}/api/user/update`, formData, { withCredentials: true })
+
+    //         setUserData(result.data);
+    //         setLoading(false)
+    //         navigate("/")
+
+    //         console.log(result.data);
+
+    //     } catch (error) {
+    //         setLoading(false)
+    //         console.log(error);
+    //     }
+    // }
+
     const handleUpdateAssistant = async () => {
-        setLoading(true)
+        setLoading(true);
         try {
-            let formData = new FormData()
-            formData.append("assistantName", assistantName)
-            if (backendImage) {
-                formData.append("assistantImage",backendImage)
-            } else {
-                formData.append("imageURL", selectedImage)
-            }
-            const result = await axios.post(`${serverURL}/api/user/update`, formData, { withCredentials: true })
+            const payload = {
+                assistantName
+            };
+            const result = await axios.post(`${serverURL}/api/user/update`, payload, {
+                withCredentials: true,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
 
             setUserData(result.data);
-            setLoading(false)
-            navigate("/")
-
+            setLoading(false);
+            navigate("/");
             console.log(result.data);
-
         } catch (error) {
-            setLoading(false)
-            console.log(error);
+            setLoading(false);
+            console.log("Error in update:", error);
         }
-    }
+    };
+
 
     return (
         <div className='w-full h-[100vh] bg-gradient-to-t from-[black] to-[#090956] flex items-center justify-center flex-col p-[10px] relative '>
 
-            <IoIosArrowRoundBack className='absolute top-[30px] left-[30px] text-white w-[30px] h-[30px] cursor-pointer ' onClick={()=> navigate("/customize")} />
+            <IoIosArrowRoundBack className='absolute top-[30px] left-[30px] text-white w-[30px] h-[30px] cursor-pointer ' onClick={() => navigate("/customize")} />
 
             <h1 className='text-white text-[30px] text-center p-[15px] mb-[10px] '>Enter Your <span className='text-blue-200'> Assistant Name </span> </h1>
 
@@ -47,6 +71,7 @@ const Customize2 = () => {
                 placeholder="eg . Jarvis "
                 className="w-full max-w-[600px] h-[45px] outline-none border-2 border-white text-white bg-transparent placeholder-gray-300 px-[15px] py-[10px] rounded-full text-[18px] "
                 required
+                name='assistantName'
                 onChange={(e) => setAssistantName(e.target.value)}
                 value={assistantName}
             />
@@ -54,8 +79,8 @@ const Customize2 = () => {
             {assistantName && <button className="min-w-[250px] h-[50px] text-black font-semibold text-[15px] bg-white rounded-full mt-[20px] cursor-pointer" disabled={loading} onClick={() => {
                 handleUpdateAssistant()
                 navigate("/")
-                
-            }}>{!loading ? "Finally Create Your Assistant":"Loading..."}</button>}
+
+            }}>{!loading ? "Finally Create Your Assistant" : "Loading..."}</button>}
 
 
 
